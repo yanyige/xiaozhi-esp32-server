@@ -14,5 +14,7 @@ services:
     volumes:
       # 配置文件目录
       - ./data:/app/data
+      # 配置到容器目录的映射
+      - ./data:/opt/xiaozhi-esp32-server/data
       # 模型文件挂接，很重要
       - ./models/SenseVoiceSmall/model.pt:/app/models/SenseVoiceSmall/model.pt
