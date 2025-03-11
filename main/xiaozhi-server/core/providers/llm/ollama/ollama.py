@@ -30,16 +30,18 @@ class LLMProvider(LLMProviderBase):
                 json={
                     "model": self.model_name,
                     "prompt": prompt,
-                    "stream": True
+                    "stream": False
                 },
-                stream=True
+                stream=False
             )
 
             for line in response.iter_lines():
                 if line:
                     json_response = json.loads(line)
                     if "response" in json_response:
-                        yield json_response["response"]
+                        content = json_response["response"]
+                        content = content.split('</think>')[-1]
+                        yield content
 
         except Exception as e:
             logger.bind(tag=TAG).error(f"Error in Ollama response generation: {e}")
