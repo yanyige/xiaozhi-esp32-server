@@ -11,6 +11,7 @@ class LLMProvider(LLMProviderBase):
         self.api_key = config["api_key"]
         self.base_url = config.get("base_url", "https://api.dify.ai/v1").rstrip('/')
         self.session_conversation_map = {}  # 存储session_id和conversation_id的映射
+        self.api_path = config.get("api_path", "/chat-messages")
 
     def response(self, session_id, dialogue):
         try:
@@ -20,7 +21,7 @@ class LLMProvider(LLMProviderBase):
 
             # 发起流式请求
             with requests.post(
-                    f"{self.base_url}/chat-messages",
+                    f"{self.base_url}{self.api_path}",
                     headers={"Authorization": f"Bearer {self.api_key}"},
                     json={
                         "query": last_msg["content"],

@@ -186,6 +186,8 @@ LLM:
     # 如果使用DifyLLM，配置文件里prompt(提示词)是无效的，需要在dify控制台设置提示词
     base_url: https://api.dify.cn/v1
     api_key: 你的DifyLLM web key
+    # 如果使用工作流，需要设置api_path为/workflows/run
+    api_path: /chat-messages
   GeminiLLM:
     type: gemini
     # 谷歌Gemini API，需要先在Google Cloud控制台创建API密钥并获取api_key
